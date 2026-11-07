@@ -1,0 +1,232 @@
+{
+  "name": "adrp-proposals",
+  "displayName": "%extension.displayName%",
+  "description": "%extension.description%",
+  "version": "0.4.0",
+  "publisher": "knowledgeBits",
+  "author": "slankka <cor_twi@outlook.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slankka/vscode-adrp.git"
+  },
+  "license": "MIT",
+  "l10n": "./l10n",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "adrp",
+          "title": "%viewsContainer.title%",
+          "icon": "media/adrp.svg"
+        }
+      ]
+    },
+    "views": {
+      "adrp": [
+        {
+          "id": "adrp.proposals",
+          "name": "%views.proposals.name%",
+          "icon": "media/adrp.svg"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "adrp.proposals",
+        "contents": "%viewsWelcome.contents%"
+      }
+    ],
+    "commands": [
+      {
+        "command": "adrp.refresh",
+        "title": "%commands.refresh.title%",
+        "category": "%commands.category%",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "adrp.quickOpen",
+        "title": "%commands.quickOpen.title%",
+        "category": "%commands.category%",
+        "icon": "$(search)"
+      },
+      {
+        "command": "adrp.openProposal",
+        "title": "%commands.openProposal.title%",
+        "category": "%commands.category%"
+      },
+      {
+        "command": "adrp.openIndex",
+        "title": "%commands.openIndex.title%",
+        "category": "%commands.category%",
+        "icon": "$(book)"
+      },
+      {
+        "command": "adrp.newProposal",
+        "title": "%commands.newProposal.title%",
+        "category": "%commands.category%",
+        "icon": "$(add)"
+      },
+      {
+        "command": "adrp.generateOverview",
+        "title": "%commands.generateOverview.title%",
+        "category": "%commands.category%",
+        "icon": "$(type-hierarchy)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "adrp.openProposal",
+          "when": "false"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "adrp.quickOpen",
+          "when": "view == adrp.proposals",
+          "group": "navigation@1"
+        },
+        {
+          "command": "adrp.refresh",
+          "when": "view == adrp.proposals",
+          "group": "navigation@2"
+        },
+        {
+          "command": "adrp.openIndex",
+          "when": "view == adrp.proposals",
+          "group": "navigation@3"
+        },
+        {
+          "command": "adrp.generateOverview",
+          "when": "view == adrp.proposals",
+          "group": "navigation@4"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "adrp.openProposal",
+          "when": "resourceFilename =~ /^[A-Za-z][A-Za-z0-9_]*-\\d{1,4}/",
+          "group": "adrp@1"
+        },
+        {
+          "command": "adrp.newProposal",
+          "when": "explorerResourceIsFolder && resourceFilename == plans",
+          "group": "adrp@2"
+        },
+        {
+          "command": "adrp.openIndex",
+          "when": "explorerResourceIsFolder && resourceFilename == plans",
+          "group": "adrp@3"
+        }
+      ]
+    },
+    "snippets": [
+      {
+        "language": "markdown",
+        "path": "./snippets/snippets.json"
+      }
+    ],
+    "configuration": {
+      "title": "%configuration.title%",
+      "properties": {
+        "adrp.idPrefix": {
+          "type": "string",
+          "scope": "resource",
+          "default": "DBIP",
+          "markdownDescription": "%configuration.idPrefix.description%"
+        },
+        "adrp.titlePrefix": {
+          "type": "string",
+          "scope": "resource",
+          "default": "",
+          "markdownDescription": "%configuration.titlePrefix.description%"
+        },
+        "adrp.include": {
+          "type": "array",
+          "scope": "resource",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "markdownDescription": "%configuration.include.description%"
+        },
+        "adrp.statusAliases": {
+          "type": "object",
+          "scope": "resource",
+          "additionalProperties": {
+            "type": "string",
+            "enum": [
+              "Draft",
+              "Ready",
+              "Implemented",
+              "Archived"
+            ]
+          },
+          "default": {},
+          "markdownDescription": "%configuration.statusAliases.description%"
+        },
+        "adrp.lintEnabled": {
+          "type": "boolean",
+          "scope": "window",
+          "default": true,
+          "description": "%configuration.lintEnabled.description%"
+        },
+        "adrp.plansDir": {
+          "type": "string",
+          "scope": "resource",
+          "default": "develop/plans",
+          "description": "%configuration.plansDir.description%"
+        },
+        "adrp.exclude": {
+          "type": "array",
+          "scope": "resource",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "**/history/**",
+            "**/output/**",
+            "**/.archived/**",
+            "**/node_modules/**"
+          ],
+          "markdownDescription": "%configuration.exclude.description%"
+        },
+        "adrp.groupByStatus": {
+          "type": "boolean",
+          "scope": "window",
+          "default": true,
+          "description": "%configuration.groupByStatus.description%"
+        },
+        "adrp.showStatusInDescription": {
+          "type": "boolean",
+          "scope": "window",
+          "default": true,
+          "description": "%configuration.showStatusInDescription.description%"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "tsc -p tsconfig.json && node --test test/*.test.mjs",
+    "test:integration": "node esbuild.mjs && node test/runIntegration.cjs",
+    "vscode:prepublish": "node esbuild.mjs --production"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/vscode": "^1.90.0",
+    "@vscode/test-electron": "^3.1.0",
+    "esbuild": "^0.24.2",
+    "typescript": "^5.7.2"
+  }
+}
