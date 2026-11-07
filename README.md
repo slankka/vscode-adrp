@@ -4,6 +4,8 @@ Browse architecture decision records and proposals in a VS Code sidebar. Select 
 
 The extension UI is available in English and Simplified Chinese. The interface follows the VS Code display language.
 
+简体中文文档：[README.zh-cn.md](README.zh-cn.md)
+
 ## Features
 
 - Scan proposal files matching `<prefix>-*.md` and group them by status.
