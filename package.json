@@ -9,6 +9,7 @@
     "type": "git",
     "url": "https://github.com/slankka/vscode-adrp.git"
   },
+  "icon": "media/marketplace-icon.png",
   "license": "MIT",
   "l10n": "./l10n",
   "engines": {
