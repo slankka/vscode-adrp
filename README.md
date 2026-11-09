@@ -1,3 +1,5 @@
+[![Install from VS Code Marketplace](https://img.shields.io/badge/VS_Code-Marketplace-007ACC?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=KnowledgeBits.adrp-proposals)
+
 # ADR Proposals
 
 Browse architecture decision records and proposals in a VS Code sidebar. Select an entry to open its Markdown file at the proposal heading. The extension supports proposal IDs such as `DBIP-001`, `ADR-001`, and `RFC-001`.
